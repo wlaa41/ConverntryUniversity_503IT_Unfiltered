@@ -4,6 +4,7 @@
 
 ### Team Members
 - Angila Gurung — 15772268
+- Sabina Mahat — 15579678
 - Richa Sorathiya — 16269255
 
 ---
