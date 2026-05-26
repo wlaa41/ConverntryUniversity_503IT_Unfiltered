@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Road Rush</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #111827;
+  color: white;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card {
+  background: #1f2937;
+  padding: 30px;
+  border-radius: 12px;
+  width: 360px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.card h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #38bdf8;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #38bdf8;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #0ea5e9;
+}
+
+.small {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.small a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.menu button {
+  width: 250px;
+}
+
+#gameContainer {
+  position: relative;
+  width: 400px;
+  height: 100vh;
+  background: #374151;
+  overflow: hidden;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+}
+
+.lane {
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+}
+
+#lane1 { left: 33%; }
+#lane2 { left: 66%; }
+
+#player {
+  width: 60px;
+  height: 100px;
+  background: red;
+  position: absolute;
+  bottom: 30px;
+  left: 170px;
+  border-radius: 10px;
+}
+
+.enemy {
+  width: 60px;
+  height: 100px;
+  background: black;
+  position: absolute;
+  top: -120px;
+  border-radius: 10px;
+}
+
+#dashboard {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.7);
+  padding: 12px;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+#dashboard p {
+  margin: 4px 0;
+}
+
+#hearts {
+  font-size: 24px;
+}
+
+.used {
+  filter: grayscale(100%);
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1f2937;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  z-index: 20;
+}
+
+.popup button {
+  margin-top: 10px;
+}
+
+#fakeLink {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: yellow;
+  color: black;
+  padding: 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+#fakeLink a {
+  color: red;
+}
+
+.instructions {
+  width: 500px;
+  line-height: 2;
+  text-align: left;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div class="page" id="loginPage">
+  <div class="card">
+    <h1>Cyber Road Rush</h1>
+
+    <input type="text" id="username" placeholder="Name">
+    <input type="email" id="email" placeholder="Email (@gmail.com only)">
+    <input type="password" id="password" placeholder="Password">
+
+    <div class="small">
+      <label><input type="checkbox"> Remember Me</label>
+      <a href="#">Forgot Password?</a>
+    </div>
+
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<!-- HOME PAGE -->
+<div class="page hidden" id="homePage">
+  <h1 style="margin-bottom: 20px;">Cyber Road Rush</h1>
+
+  <div class="menu">
+    <button onclick="startGame()">Start Game</button>
+    <button onclick="showInstructions()">Instructions</button>
+    <button onclick="showSettings()">Settings</button>
+    <button onclick="logout()">Exit</button>
+  </div>
+</div>
+
+<!-- INSTRUCTIONS -->
+<div class="page hidden" id="instructionPage">
+  <div class="instructions">
+    <h1>Game Instructions</h1>
+    <br>
+    <p>⬅ Left Arrow = Move Left</p>
+    <p>➡ Right Arrow = Move Right</p>
+    <p>A = Accelerate</p>
+    <p>B = Brake</p>
+    <p>Space = Pause</p>
+    <p>Avoid crashing into enemy cars.</p>
+    <p>Answer cybersecurity questions correctly to continue.</p>
+    <p>Wrong answers restart the game.</p>
+    <br>
+    <button onclick="goHome()">Back</button>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="page hidden" id="settingsPage">
+  <div class="card">
+    <h1>Settings</h1>
+
+    <label><input type="checkbox"> Sounds</label><br><br>
+    <label><input type="checkbox"> Notifications</label><br><br>
+
+    <button onclick="logout()">Logout</button>
+    <button onclick="goHome()">Back</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div class="hidden" id="gamePage">
+  <div id="gameContainer">
+
+    <div id="dashboard">
+      <p>Score: <span id="score">0</span></p>
+      <p>High Score: <span id="highScore">0</span></p>
+      <p>Speed: <span id="speed">5</span></p>
+      <p>Time: <span id="time">0</span>s</p>
+      <div id="hearts">❤️ ❤️ ❤️ ❤️ ❤️</div>
+    </div>
+
+    <div class="lane" id="lane1"></div>
+    <div class="lane" id="lane2"></div>
+
+    <div id="player"></div>
+    <div class="enemy" id="enemy"></div>
+
+    <div id="fakeLink">
+      <a href="#" onclick="show404()">WIN FREE IPHONE CLICK HERE</a>
+    </div>
+
+    <!-- Pause Popup -->
+    <div class="popup hidden" id="pausePopup">
+      <h2>Game Paused</h2>
+      <button onclick="resumeGame()">Resume</button>
+      <button onclick="restartGame()">Restart</button>
+    </div>
+
+    <!-- Question Popup -->
+    <div class="popup hidden" id="questionPopup">
+      <h3 id="questionText"></h3>
+
+      <button onclick="checkAnswer(0)" id="q0"></button>
+      <button onclick="checkAnswer(1)" id="q1"></button>
+      <button onclick="checkAnswer(2)" id="q2"></button>
+      <button onclick="checkAnswer(3)" id="q3"></button>
+
+      <p style="margin-top: 10px;">Time Left: <span id="timer">10</span></p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const pages = [
+  'loginPage',
+  'homePage',
+  'instructionPage',
+  'settingsPage',
+  'gamePage'
+];
+
+function showPage(id) {
+  pages.forEach(p => {
+    document.getElementById(p).classList.add('hidden');
+  });
+
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function login() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+  const passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+
+  if (!emailRegex.test(email)) {
+    alert('Email must end with @gmail.com');
+    return;
+  }
+
+  if (!passRegex.test(password)) {
+    alert('Password must contain 8 characters, capital letter, number and special character');
+    return;
+  }
+
+  showPage('homePage');
+}
+
+function logout() {
+  location.reload();
+}
+
+function showInstructions() {
+  showPage('instructionPage');
+}
+
+function showSettings() {
+  showPage('settingsPage');
+}
+
+function goHome() {
+  showPage('homePage');
+}
+
+// GAME VARIABLES
+let lane = 1;
+let speed = 5;
+let score = 0;
+let highScore = localStorage.getItem('highScore') || 0;
+let gameTime = 0;
+let paused = false;
+let gameLoop;
+let scoreLoop;
+let timeLoop;
+let enemyTop = -120;
+let usedHearts = 0;
+
+const player = document.getElementById('player');
+const enemy = document.getElementById('enemy');
+
+document.getElementById('highScore').innerText = highScore;
+
+const questions = [
+  {
+    question: 'What is the main purpose of a strong password?',
+    options: [
+      'To make typing harder',
+      'To protect accounts from unauthorized access',
+      'To slow down the computer',
+      'To increase internet speed'
+    ],
+    answer: 1
+  },
+  {
+    question: 'Which is an example of phishing?',
+    options: [
+      'Updating software',
+      'Receiving a fake email asking for personal information',
+      'Using antivirus software',
+      'Backing up files'
+    ],
+    answer: 1
+  },
+  {
+    question: 'Why is public Wi-Fi risky?',
+    options: [
+      'It overheats devices',
+      'Hackers may intercept your data',
+      'It deletes files',
+      'It blocks websites'
+    ],
+    answer: 1
+  },
+  {
+    question: 'What does 2FA do?',
+    options: [
+      'Creates usernames',
+      'Requires two devices',
+      'Adds extra security during login',
+      'Doubles internet speed'
+    ],
+    answer: 2
+  },
+  {
+    question: 'Pretending to be IT support is what attack?',
+    options: [
+      'Malware',
+      'Brute Force',
+      'Social Engineering',
+      'DoS'
+    ],
+    answer: 2
+  }
+];
+
+function startGame() {
+  showPage('gamePage');
+
+  score = localStorage.getItem('savedScore') || 0;
+  document.getElementById('score').innerText = score;
+
+  gameLoop = setInterval(updateGame, 20);
+
+  scoreLoop = setInterval(() => {
+    if (!paused) {
+      score = Number(score) + 10;
+      document.getElementById('score').innerText = score;
+    }
+  }, 3000);
+
+  timeLoop = setInterval(() => {
+    if (!paused) {
+      gameTime++;
+      document.getElementById('time').innerText = gameTime;
+
+      if (gameTime >= 240) {
+        endGame();
+      }
+    }
+  }, 1000);
+}
+
+function updateGame() {
+  if (paused) return;
+
+  enemyTop += speed;
+  enemy.style.top = enemyTop + 'px';
+
+  if (enemyTop > 800) {
+    enemyTop = -120;
+
+    const lanes = [40, 170, 300];
+    enemy.style.left = lanes[Math.floor(Math.random() * 3)] + 'px';
+  }
+
+  checkCollision();
+}
+
+function checkCollision() {
+  const p = player.getBoundingClientRect();
+  const e = enemy.getBoundingClientRect();
+
+  if (
+    p.left < e.right &&
+    p.right > e.left &&
+    p.top < e.bottom &&
+    p.bottom > e.top
+  ) {
+    askQuestion();
+    enemyTop = -120;
+  }
+}
+
+// CONTROLS
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' && lane > 0) {
+    lane--;
+  }
+
+  if (e.key === 'ArrowRight' && lane < 2) {
+    lane++;
+  }
+
+  if (e.key === 'a' || e.key === 'A') {
+    speed++;
+    score += 5;
+  }
+
+  if (e.key === 'b' || e.key === 'B') {
+    speed--;
+    if (speed < 1) speed = 1;
+  }
+
+  if (e.code === 'Space') {
+    pauseGame();
+  }
+
+  document.getElementById('speed').innerText = speed;
+
+  const positions = [40, 170, 300];
+  player.style.left = positions[lane] + 'px';
+});
+
+function pauseGame() {
+  paused = true;
+  document.getElementById('pausePopup').classList.remove('hidden');
+}
+
+function resumeGame() {
+  paused = false;
+  document.getElementById('pausePopup').classList.add('hidden');
+}
+
+function restartGame() {
+  location.reload();
+}
+
+// QUESTIONS
+let currentQuestion;
+let countdown;
+
+function askQuestion() {
+  paused = true;
+
+  currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+
+  document.getElementById('questionText').innerText = currentQuestion.question;
+
+  currentQuestion.options.forEach((option, index) => {
+    document.getElementById('q' + index).innerText = option;
+  });
+
+  document.getElementById('questionPopup').classList.remove('hidden');
+
+  let timeLeft = 10;
+  document.getElementById('timer').innerText = timeLeft;
+
+  countdown = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer').innerText = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      alert('Time Up!');
+      restartGame();
+    }
+  }, 1000);
+}
+
+function checkAnswer(index) {
+  clearInterval(countdown);
+
+  if (index === currentQuestion.answer) {
+    alert('Correct Answer!');
+
+    paused = false;
+
+    usedHearts++;
+    updateHearts();
+
+    document.getElementById('questionPopup').classList.add('hidden');
+
+    // slower scoring after crash
+    clearInterval(scoreLoop);
+
+    scoreLoop = setInterval(() => {
+      if (!paused) {
+        score += 10;
+        document.getElementById('score').innerText = score;
+      }
+    }, 6000);
+
+    setTimeout(() => {
+      clearInterval(scoreLoop);
+
+      scoreLoop = setInterval(() => {
+        if (!paused) {
+          score += 10;
+          document.getElementById('score').innerText = score;
+        }
+      }, 3000);
+
+    }, 30000);
+
+  } else {
+    alert('Wrong Answer! Game Over');
+    localStorage.setItem('savedScore', 0);
+    restartGame();
+  }
+}
+
+function updateHearts() {
+  let text = '';
+
+  for (let i = 0; i < 5; i++) {
+    if (i < usedHearts) {
+      text += '<span class="used">❤️</span> ';
+    } else {
+      text += '❤️ ';
+    }
+  }
+
+  document.getElementById('hearts').innerHTML = text;
+}
+
+function endGame() {
+  clearInterval(gameLoop);
+  clearInterval(scoreLoop);
+  clearInterval(timeLoop);
+
+  localStorage.setItem('savedScore', score);
+
+  if (score > highScore) {
+    localStorage.setItem('highScore', score);
+  }
+
+  alert('Game Over! Your Score: ' + score);
+
+showPage('homePage');
+
+const menu = document.querySelector('.menu');
+
+if (!document.getElementById('playAgainBtn')) {
+  const playAgain = document.createElement('button');
+  playAgain.id = 'playAgainBtn';
+  playAgain.innerText = 'Play Again';
+  playAgain.onclick = () => {
+    location.reload();
+  };
+
+  menu.appendChild(playAgain);
+}
+}
+
+function show404() {
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;background:black;color:white;flex-direction:column;">
+      <h1 style="font-size:80px;">404</h1>
+      <h2>SCAM LINK DETECTED</h2>
+      <p>You clicked a phishing link.</p>
+      <button onclick="location.reload()" style="width:200px;">Return</button>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
