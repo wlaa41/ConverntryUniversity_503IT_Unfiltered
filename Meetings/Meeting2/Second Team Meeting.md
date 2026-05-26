@@ -35,7 +35,7 @@
 | Task / Action | Responsible Person | Deadline |
 |---|---|---|
 | Idea | Richa | 26/05/2026 |
-| Planning | Richa,Renita, Sabina | 26/05/2026 |
+| Planning | Richa, Renita, Sabina | 26/05/2026 |
 | Base Layout | Everyone | 26/05/2026 |
 | Programming | Richa | 27/05/2026 |
 | Designing | Kaberi | 29/05/2026 |
