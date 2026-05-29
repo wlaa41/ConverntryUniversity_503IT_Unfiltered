@@ -1,0 +1,86 @@
+:root{--bg:#070916;--panel:rgba(17,24,52,.82);--line:rgba(255,255,255,.14);--text:#f8fbff;--muted:#a9b5d6;--cyan:#38e8ff;--pink:#ff4fd8;--green:#50ff9d;--yellow:#ffd84a;--red:#ff4f6d;--shadow:0 24px 70px rgba(0,0,0,.45)}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#17235c 0,#090b1a 37%,#050611 100%);color:var(--text);min-height:100vh;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;background:linear-gradient(120deg,rgba(56,232,255,.10),transparent 35%,rgba(255,79,216,.12)),repeating-linear-gradient(90deg,transparent 0 70px,rgba(255,255,255,.025) 71px 72px);pointer-events:none}.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px 7vw;background:rgba(4,7,19,.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text);font-weight:900;letter-spacing:.5px}.brand img{width:46px;height:46px;border-radius:14px;object-fit:cover;box-shadow:0 0 25px rgba(56,232,255,.45)}.links{display:flex;gap:10px;align-items:center}.links a,.btn{border:1px solid var(--line);color:var(--text);text-decoration:none;background:linear-gradient(135deg,rgba(56,232,255,.14),rgba(255,79,216,.12));padding:11px 16px;border-radius:16px;font-weight:800;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.22);transition:.2s}.links a:hover,.btn:hover{transform:translateY(-2px);border-color:rgba(56,232,255,.55)}.btn.primary{background:linear-gradient(135deg,var(--cyan),#6a5cff,var(--pink));color:#04101c;border:0}.btn.danger{background:linear-gradient(135deg,#ff4f6d,#ff9c4a);color:#160006;border:0}.btn.ghost{background:rgba(255,255,255,.07)}.wrap{width:min(1180px,92vw);margin:auto}.hero{min-height:calc(100vh - 76px);display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding:42px 0}.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(56,232,255,.35);background:rgba(56,232,255,.09);border-radius:999px;padding:9px 13px;color:#bdf8ff;font-weight:800}.title{font-size:clamp(42px,7vw,86px);line-height:.95;margin:18px 0 16px;text-transform:uppercase;text-shadow:0 0 24px rgba(56,232,255,.28)}.grad{background:linear-gradient(90deg,var(--cyan),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:18px;line-height:1.7;color:var(--muted);max-width:680px}.card{background:var(--panel);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:24px;position:relative;overflow:hidden}.card:after{content:"";position:absolute;inset:auto -50px -70px auto;width:170px;height:170px;background:radial-gradient(circle,var(--cyan),transparent 65%);opacity:.16}.grid{display:grid;gap:20px}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}.form{width:min(520px,92vw);margin:50px auto}.input,select{width:100%;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:16px;color:var(--text);padding:14px 16px;margin:8px 0 14px;font-size:16px}select option{background:#101633}.muted{color:var(--muted)}.page-title{font-size:42px;margin:34px 0 10px}.locked{opacity:.45;filter:grayscale(1)}.stat{display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid var(--line);margin:10px 0}.garage-car{min-height:210px;display:grid;place-items:center;cursor:pointer}.selected{outline:3px solid var(--cyan);box-shadow:0 0 35px rgba(56,232,255,.35)}.avatar{font-size:58px;padding:20px;border-radius:24px;text-align:center;background:rgba(255,255,255,.07);cursor:pointer;border:1px solid var(--line);transition:.2s}.avatar:hover{transform:translateY(-3px);border-color:var(--cyan)}.avatar.big{font-size:78px;min-height:260px;display:grid;place-items:center}.car3d{width:116px;height:176px;position:relative;transform:perspective(420px) rotateX(56deg);transform-style:preserve-3d;filter:drop-shadow(0 26px 20px rgba(0,0,0,.6))}.car3d .body{position:absolute;inset:18px 22px;border-radius:24px 24px 14px 14px;background:linear-gradient(135deg,var(--car1,#fff),var(--car2,#a6f1ff));box-shadow:inset 0 10px 15px rgba(255,255,255,.25),0 0 28px rgba(56,232,255,.4)}.car3d .top{position:absolute;left:36px;right:36px;top:48px;height:58px;border-radius:16px;background:rgba(5,9,20,.72);border:2px solid rgba(255,255,255,.25)}.car3d .light{position:absolute;bottom:20px;width:18px;height:9px;border-radius:8px;background:#dffcff;box-shadow:0 0 16px #fff}.car3d .light.l{left:30px}.car3d .light.r{right:30px}.car3d .wheel{position:absolute;width:20px;height:44px;border-radius:12px;background:#05070e;box-shadow:inset 0 0 0 4px #202842}.car3d .w1{left:5px;top:42px}.car3d .w2{right:5px;top:42px}.car3d .w3{left:5px;bottom:34px}.car3d .w4{right:5px;bottom:34px}.game-shell{display:grid;grid-template-columns:280px 1fr 280px;gap:18px;padding:18px;width:min(1440px,98vw);margin:auto}.hud{display:flex;flex-direction:column;gap:12px}.meter{height:14px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;border:1px solid var(--line)}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));box-shadow:0 0 20px var(--cyan)}#gameArea{height:760px;min-height:70vh;border-radius:30px;position:relative;overflow:hidden;border:2px solid rgba(56,232,255,.25);background:linear-gradient(#111b38,#090b1d);box-shadow:inset 0 0 70px rgba(0,0,0,.9),0 0 50px rgba(56,232,255,.18);perspective:700px}.road{position:absolute;inset:-18% 3% -10%;background:linear-gradient(90deg,#101010 0 6%,#282828 6% 94%,#101010 94%),repeating-linear-gradient(0deg,transparent 0 65px,rgba(255,255,255,.78) 65px 104px,transparent 104px 165px);clip-path:polygon(22% 0,78% 0,100% 100%,0 100%);transform:rotateX(54deg);transform-origin:bottom;animation:roadMove .65s linear infinite}.road:before,.road:after{content:"";position:absolute;top:0;bottom:0;width:7px;background:var(--yellow);box-shadow:0 0 18px var(--yellow)}.road:before{left:18%}.road:after{right:18%}.road .lane{position:absolute;top:0;bottom:0;width:4px;background:rgba(255,255,255,.35);left:50%;box-shadow:-22vw 0 0 rgba(255,255,255,.2),22vw 0 0 rgba(255,255,255,.2)}@keyframes roadMove{to{background-position:0 165px}}.city{position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(56,232,255,.08)),repeating-linear-gradient(90deg,rgba(56,232,255,.18) 0 5px,transparent 5px 80px);opacity:.55}.player,.enemy,.item,.hazard{position:absolute;z-index:5}.player{transition:top .08s linear}.player .car3d{width:104px;height:160px}.enemy .car3d{width:96px;height:150px}.enemy .car3d{--car1:#ff2455;--car2:#9f001e}.item{font-size:34px;filter:drop-shadow(0 0 12px rgba(80,255,157,.8))}.hazard{font-size:38px;filter:drop-shadow(0 0 14px rgba(255,79,109,.9))}.scanline{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 5px);pointer-events:none;mix-blend-mode:overlay}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,5,14,.78);z-index:99;backdrop-filter:blur(9px);padding:20px}.modal.active{display:flex}.modal-box{width:min(640px,94vw);background:#0d1430;border:1px solid rgba(56,232,255,.35);border-radius:30px;padding:26px;box-shadow:0 0 70px rgba(56,232,255,.22)}.answers{display:grid;gap:12px;margin-top:18px}.answer{padding:14px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);cursor:pointer;text-align:left;font-weight:800}.answer:hover{border-color:var(--cyan)}.mission{font-size:14px;line-height:1.5}.tiny{font-size:13px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#0d1430;border:1px solid var(--cyan);padding:12px 18px;border-radius:999px;box-shadow:0 0 30px rgba(56,232,255,.25);display:none;z-index:120}.toast.show{display:block}@media(max-width:950px){.hero,.grid.two,.grid.three,.game-shell{grid-template-columns:1fr}.links{flex-wrap:wrap}.game-shell{padding:10px}#gameArea{height:620px}.hud{order:2}}
+
+.control-pad{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}.control-pad button{font-size:24px;padding:16px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);font-weight:900;cursor:pointer}.sound-tip{border:1px solid rgba(80,255,157,.35);background:rgba(80,255,157,.08);padding:10px;border-radius:16px}.enemy{filter:drop-shadow(0 12px 14px rgba(255,36,85,.45))}.player{filter:drop-shadow(0 16px 18px rgba(56,232,255,.42))}
+
+/* === V7 polish fixes: clean one-time setup, broad road canvas, smoother game feel === */
+.feature-list{color:var(--muted);line-height:1.9;margin:8px 0 0;padding-left:20px}.level-card{min-height:230px;display:flex;flex-direction:column;justify-content:space-between}.setup-wrap{display:grid;place-items:center;min-height:calc(100vh - 90px)}.setup-panel{width:min(680px,94vw);background:linear-gradient(145deg,rgba(17,24,52,.92),rgba(7,12,31,.92));border:1px solid rgba(56,232,255,.28);border-radius:30px;box-shadow:var(--shadow);padding:30px;text-align:center}.compact-options{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0}.driver-chip,.mini-choice{border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);border-radius:22px;padding:18px;font-weight:900;cursor:pointer;transition:.2s}.driver-chip span{display:block;font-size:58px;margin-bottom:8px}.driver-chip:hover,.mini-choice:hover{transform:translateY(-2px);border-color:var(--cyan)}.mini-choice{font-size:18px;padding:14px 18px}.garage-car .car3d{margin:20px auto}.game-shell{grid-template-columns:270px minmax(620px,1fr) 270px;align-items:start}#gameArea{height:780px;min-height:72vh;background:#050713;position:relative}#gameCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;border-radius:28px}.cinematic{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%) scale(.8);font-size:clamp(28px,5vw,62px);font-weight:1000;letter-spacing:3px;color:#dffcff;text-shadow:0 0 20px var(--cyan),0 0 42px var(--pink);opacity:0;pointer-events:none;transition:.3s;z-index:7;text-align:center}.cinematic.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.sound-tip{background:linear-gradient(135deg,rgba(80,255,157,.10),rgba(56,232,255,.08))}.modal-box{animation:popIn .2s ease-out}@keyframes popIn{from{transform:scale(.92);opacity:.4}to{transform:scale(1);opacity:1}}@media(max-width:1050px){.game-shell{grid-template-columns:1fr}#gameArea{height:640px;min-width:0}.compact-options{grid-template-columns:1fr}}
+
+/* === V8 gameplay tuning: longer smoother playable racing === */
+#gameArea{height:820px;min-height:76vh;}
+.control-pad button{padding:20px;font-size:28px;background:linear-gradient(135deg,rgba(56,232,255,.16),rgba(255,255,255,.08));}
+.sound-tip::before{content:"🔊 ";}
+@media(max-width:1050px){#gameArea{height:700px;}}
+
+/* === V9 checked update: login helpers, manual speed controls, mobile support === */
+.checkline{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:800;margin:0 0 14px}.checkline input{width:18px;height:18px;accent-color:var(--cyan)}.full{width:100%;margin-top:10px}.row-actions{display:flex;gap:12px;flex-wrap:wrap}.mobile-pad{grid-template-columns:1fr 1fr;gap:12px}.mobile-pad button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:72px;touch-action:none}.mobile-pad small{font-size:11px;color:var(--muted);margin-top:4px}.mobile-pad #upBtn{grid-column:1/3;background:linear-gradient(135deg,rgba(80,255,157,.20),rgba(56,232,255,.12))}.mobile-pad #downBtn{grid-column:1/3;background:linear-gradient(135deg,rgba(255,79,109,.18),rgba(255,255,255,.08))}
+@media(max-width:760px){body{font-size:15px}.nav{position:relative;padding:10px 4vw;align-items:flex-start;gap:10px}.brand img{width:38px;height:38px}.links{justify-content:flex-end}.links a,.btn{padding:9px 11px;border-radius:13px;font-size:13px}.game-shell{width:100%;padding:8px;gap:10px}.hud{padding:14px;border-radius:20px}.hud h2{font-size:18px;margin:4px 0}.stat{padding:9px 10px;font-size:13px;margin:5px 0}.mission,.muted,.tiny{font-size:12px}.game-shell .hud:first-child{order:1}.game-shell #gameArea{order:2}.game-shell .hud:last-child{order:3}#gameArea{height:68vh;min-height:470px;border-radius:20px}#gameCanvas{border-radius:18px}.control-pad button{min-height:64px;padding:12px;font-size:24px}.modal-box{padding:18px;border-radius:22px}.answer{padding:12px;font-size:14px}.form{margin:24px auto}.page-title{font-size:30px}.grid.two,.grid.three{grid-template-columns:1fr}.car3d{transform:perspective(420px) rotateX(54deg) scale(.88)}}
+@media(max-width:430px){#gameArea{height:62vh;min-height:430px}.game-shell{padding:6px}.hud:first-child{display:grid;grid-template-columns:1fr 1fr;gap:6px}.hud:first-child h2,.hud:first-child .mission,.hud:first-child .meter,.hud:first-child .tiny,.hud:first-child #beginBtn,.hud:first-child a{grid-column:1/3}.sound-tip{display:none}.control-pad button{min-height:58px}}
+
+
+/* === Final gameplay polish: smoother steering + hint system === */
+.hint-row{margin:12px 0 14px;padding:12px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.06)}
+.hint-btn{width:100%;justify-content:center;margin-bottom:8px}
+.hint-btn:disabled{opacity:.55;cursor:not-allowed;filter:grayscale(.4)}
+.hint-text{margin:8px 0 0;color:#aef8ff;font-weight:800;line-height:1.45}
+.answers{margin-top:12px}
+
+/* === Responsive performance mode: playable on phone, laptop and desktop === */
+@media(max-width:760px){
+  body:before{background:linear-gradient(120deg,rgba(56,232,255,.07),transparent 45%,rgba(255,79,216,.07))}
+  .nav{position:sticky;top:0;z-index:60;padding:8px 10px;align-items:center}
+  .brand{gap:8px;font-size:14px;line-height:1.05}
+  .brand img{width:34px;height:34px;border-radius:10px;box-shadow:none}
+  .links{gap:6px;justify-content:flex-end}
+  .links a,.links .btn{padding:8px 10px;border-radius:12px;font-size:12px;box-shadow:none}
+  .game-shell{display:grid;grid-template-columns:1fr;width:100%;padding:6px;gap:8px}
+  .game-shell .hud:first-child{order:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:12px;border-radius:18px;box-shadow:0 12px 34px rgba(0,0,0,.28)}
+  .game-shell .hud:first-child h2,.game-shell .hud:first-child .mission,.game-shell .hud:first-child .meter,.game-shell .hud:first-child .tiny,.game-shell .hud:first-child #beginBtn,.game-shell .hud:first-child a{grid-column:1/-1}
+  .game-shell .hud:first-child h2{font-size:16px;margin:0}
+  .game-shell .hud:first-child .mission{display:none}
+  .stat{padding:8px 10px;margin:0;font-size:12px;border-radius:14px}
+  .meter{height:10px}
+  #gameArea{order:2;height:min(54vh,470px);min-height:330px;border-radius:18px;box-shadow:inset 0 0 34px rgba(0,0,0,.75)}
+  #gameCanvas{border-radius:16px}
+  .game-shell .hud:last-child{order:3;position:sticky;bottom:0;z-index:50;padding:10px;border-radius:18px 18px 0 0;box-shadow:0 -14px 34px rgba(0,0,0,.38)}
+  .game-shell .hud:last-child h2{font-size:15px;margin:0}
+  .game-shell .hud:last-child>p.muted,.game-shell .hud:last-child .sound-tip,.game-shell .hud:last-child .stat,.game-shell .hud:last-child>p:last-child{display:none}
+  .mobile-pad{grid-template-columns:1fr 1fr;gap:8px;margin:0}
+  .mobile-pad #upBtn,.mobile-pad #downBtn{grid-column:auto}
+  .mobile-pad button{min-height:52px;padding:8px;font-size:20px;border-radius:14px;box-shadow:none}
+  .mobile-pad small{font-size:10px}
+  .cinematic{font-size:28px;letter-spacing:1px}
+  .modal{padding:10px}
+  .modal-box{padding:16px;border-radius:20px}
+}
+
+@media(min-width:761px) and (max-width:1180px){
+  .game-shell{grid-template-columns:220px minmax(430px,1fr) 220px;gap:12px;padding:12px}
+  #gameArea{height:72vh;min-height:560px}
+  .hud{padding:16px;border-radius:22px}
+  .stat{padding:10px;margin:6px 0}
+  .mission,.muted,.tiny{font-size:12px}
+  .control-pad button{min-height:58px;padding:12px;font-size:22px}
+}
+
+/* === Readability pass for laptop and Mac screens === */
+@media(min-width:1051px){
+  .game-shell{grid-template-columns:310px minmax(620px,1fr) 310px;gap:18px;width:min(1500px,98vw)}
+  .hud{gap:14px;padding:28px}
+  .hud h2{font-size:26px;line-height:1.15;margin:0 0 12px}
+  .stat{padding:15px 16px;margin:7px 0;font-size:17px}
+  .stat b{font-size:17px}
+  .stat span{font-size:17px}
+  .mission{font-size:16px;line-height:1.55}
+  .muted{font-size:16px;line-height:1.45}
+  .tiny{font-size:15px}
+  #beginBtn,.hud .btn{font-size:17px;padding:14px 18px}
+  .control-pad{gap:14px}
+  .control-pad button{min-height:86px;font-size:30px;padding:18px}
+  .mobile-pad small{font-size:13px;margin-top:7px}
+  .sound-tip{font-size:16px;line-height:1.35}
+  .modal-box{font-size:18px}
+  .modal-box h2{font-size:30px}
+  .modal-box p{font-size:18px;line-height:1.5}
+  .answer{font-size:17px;padding:16px}
+  .hint-text{font-size:17px}
+}
