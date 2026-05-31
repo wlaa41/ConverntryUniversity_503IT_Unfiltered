@@ -65,6 +65,14 @@ document.getElementById('beginBtn').onclick=()=>{running=true;paused=false;last=
         last=performance.now();
         requestAnimationFrame(loop);
     }
+};document.getElementById('closeInstructions')
+.onclick=()=>{
+
+    document
+    .getElementById('instructionModal')
+    .classList
+    .remove('active');
+
 };document.getElementById('beginBtn').disabled=true;requestAnimationFrame(loop)};
 window.onkeydown=e=>{const k=e.key.toLowerCase(); if(e.key.toLowerCase()==='p'){
 
