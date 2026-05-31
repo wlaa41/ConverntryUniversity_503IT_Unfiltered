@@ -1,12 +1,52 @@
 const $=s=>document.querySelector(s);const LS={users:'rr_users',active:'rr_active',prefs:'rr_prefs',progress:'rr_progress',remember:'rr_remember_email'};
 const get=(k,d)=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d));const set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+function validPassword(password){
+
+    return /^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/
+        .test(password);
+
+}
 function activeUser(){const email=localStorage.getItem(LS.active);return get(LS.users,[]).find(u=>u.email===email)||null}
 function requireLogin(){if(!activeUser()) location.href='login.html'}
 function nav(){const n=$('.links'); if(!n)return; const u=activeUser(); n.innerHTML=u?`<a href="dashboard.html">Dashboard</a><a href="garage.html">Garage</a><a href="profile.html">Profile</a><button class="btn danger" onclick="logout()">Logout</button>`:`<a href="login.html">Login</a><a href="register.html">Register</a>`}
 function logout(){localStorage.removeItem(LS.active); location.href='index.html'}
 function toast(msg){let t=$('.toast')||document.body.appendChild(Object.assign(document.createElement('div'),{className:'toast'}));t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
-function initAuth(){nav(); const reg=$('#registerForm'), log=$('#loginForm'); if(log){const saved=localStorage.getItem(LS.remember); if(saved){$('#email').value=saved; const cb=$('#rememberMe'); if(cb)cb.checked=true;} const forgot=$('#forgotBtn'), fmodal=$('#forgotModal'); if(forgot&&fmodal){forgot.onclick=()=>fmodal.classList.add('active'); $('#closeForgot').onclick=()=>fmodal.classList.remove('active'); $('#resetBtn').onclick=resetPassword;}}
- if(reg) reg.onsubmit=e=>{e.preventDefault();let users=get(LS.users,[]);let name=$('#name').value.trim(),email=$('#email').value.trim().toLowerCase(),pass=$('#password').value;if(users.some(u=>u.email===email))return toast('Account already exists. Please login.');users.push({name,email,pass,joined:new Date().toLocaleDateString(),bestScore:0,coins:0,totalQuestions:0,correctQuestions:0});set(LS.users,users);localStorage.setItem(LS.active,email);set(LS.prefs,{car:'classic',gender:'female',setupDone:false});set(LS.progress,{unlocked:1,level:1});location.href='driver.html'};
+function initAuth(){nav();
+                    const passBox=$('#password');
+const errorBox=$('#passwordError');
+
+if(passBox && errorBox){
+
+    passBox.addEventListener('input',()=>{
+
+        if(validPassword(passBox.value)){
+
+            errorBox.textContent='';
+
+        }else{
+
+            errorBox.textContent=
+            'Password must contain at least 8 characters, one number and one special character.';
+
+        }
+
+    });
+
+}
+
+  const reg=$('#registerForm'), log=$('#loginForm'); if(log){const saved=localStorage.getItem(LS.remember); if(saved){$('#email').value=saved; const cb=$('#rememberMe'); if(cb)cb.checked=true;} const forgot=$('#forgotBtn'), fmodal=$('#forgotModal'); if(forgot&&fmodal){forgot.onclick=()=>fmodal.classList.add('active'); $('#closeForgot').onclick=()=>fmodal.classList.remove('active'); $('#resetBtn').onclick=resetPassword;}}
+ if(reg) reg.onsubmit=e=>{e.preventDefault();let users=get(LS.users,[]);let name=$('#name').value.trim(),email=$('#email').value.trim().toLowerCase(),pass=$('#password').value; if(!validPassword(pass)){
+
+    const errorBox=$('#passwordError');
+
+    if(errorBox){
+        errorBox.textContent=
+        'Password must contain at least 8 characters, one number and one special character.';
+    }
+
+    return;
+}
+                          if(users.some(u=>u.email===email))return toast('Account already exists. Please login.');users.push({name,email,pass,joined:new Date().toLocaleDateString(),bestScore:0,coins:0,totalQuestions:0,correctQuestions:0});set(LS.users,users);localStorage.setItem(LS.active,email);set(LS.prefs,{car:'classic',gender:'female',setupDone:false});set(LS.progress,{unlocked:1,level:1});location.href='driver.html'};
  if(log) log.onsubmit=e=>{e.preventDefault();let u=get(LS.users,[]).find(x=>x.email===$('#email').value.trim().toLowerCase()&&x.pass===$('#password').value);if(!u)return toast('Wrong email or password.');localStorage.setItem(LS.active,u.email); if($('#rememberMe')&&$('#rememberMe').checked)localStorage.setItem(LS.remember,u.email); else localStorage.removeItem(LS.remember); let prefs=get(LS.prefs,{setupDone:false});location.href=prefs.setupDone?'dashboard.html':'driver.html'};
 }
 
