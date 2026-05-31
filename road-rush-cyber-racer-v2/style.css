@@ -5,6 +5,7 @@
 /* === V7 polish fixes: clean one-time setup, broad road canvas, smoother game feel === */
 .feature-list{color:var(--muted);line-height:1.9;margin:8px 0 0;padding-left:20px}.level-card{min-height:230px;display:flex;flex-direction:column;justify-content:space-between}.setup-wrap{display:grid;place-items:center;min-height:calc(100vh - 90px)}.setup-panel{width:min(680px,94vw);background:linear-gradient(145deg,rgba(17,24,52,.92),rgba(7,12,31,.92));border:1px solid rgba(56,232,255,.28);border-radius:30px;box-shadow:var(--shadow);padding:30px;text-align:center}.compact-options{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0}.driver-chip,.mini-choice{border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);border-radius:22px;padding:18px;font-weight:900;cursor:pointer;transition:.2s}.driver-chip span{display:block;font-size:58px;margin-bottom:8px}.driver-chip:hover,.mini-choice:hover{transform:translateY(-2px);border-color:var(--cyan)}.mini-choice{font-size:18px;padding:14px 18px}.garage-car .car3d{margin:20px auto}.game-shell{grid-template-columns:270px minmax(620px,1fr) 270px;align-items:start}#gameArea{height:780px;min-height:72vh;background:#050713;position:relative}#gameCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;border-radius:28px}.cinematic{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%) scale(.8);font-size:clamp(28px,5vw,62px);font-weight:1000;letter-spacing:3px;color:#dffcff;text-shadow:0 0 20px var(--cyan),0 0 42px var(--pink);opacity:0;pointer-events:none;transition:.3s;z-index:7;text-align:center}.cinematic.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.sound-tip{background:linear-gradient(135deg,rgba(80,255,157,.10),rgba(56,232,255,.08))}.modal-box{animation:popIn .2s ease-out}@keyframes popIn{from{transform:scale(.92);opacity:.4}to{transform:scale(1);opacity:1}}@media(max-width:1050px){.game-shell{grid-template-columns:1fr}#gameArea{height:640px;min-width:0}.compact-options{grid-template-columns:1fr}}
 
+
 /* === V8 gameplay tuning: longer smoother playable racing === */
 #gameArea{height:820px;min-height:76vh;}
 .control-pad button{padding:20px;font-size:28px;background:linear-gradient(135deg,rgba(56,232,255,.16),rgba(255,255,255,.08));}
@@ -27,3 +28,27 @@
 /* === V13 enhanced graphics + quiz timer === */
 .quiz-timer{display:inline-block;margin:8px 0 10px;padding:10px 14px;border-radius:999px;background:rgba(255,216,74,.12);border:1px solid rgba(255,216,74,.45);color:#ffd84a;font-weight:900;box-shadow:0 0 18px rgba(255,216,74,.14)}
 #gameArea{box-shadow:inset 0 0 100px rgba(0,0,0,.88),0 0 55px rgba(56,232,255,.22),0 0 30px rgba(255,79,216,.14)}
+
+.pause-btn{
+    position:absolute;
+    top:15px;
+    right:15px;
+    z-index:20;
+
+    padding:10px 16px;
+
+    border:none;
+    border-radius:12px;
+
+    background:rgba(0,0,0,.7);
+    color:white;
+
+    font-weight:700;
+    cursor:pointer;
+
+    backdrop-filter:blur(5px);
+}
+
+.pause-btn:hover{
+    background:rgba(56,232,255,.25);
+}
