@@ -39,7 +39,7 @@ const HINTS={
 const CAR_COLORS={classic:['#ffffff','#aef8ff'],neon:['#38e8ff','#ff4fd8'],shadow:['#29314e','#8a7cff'],gold:['#ffd84a','#ff8b3d']};
 let L=LEVELS[progress.level],running=false,paused=false,last=0,distance=0,score=0,coins=0,lives=3,shield=0,nitro=1,manualGear=1,questionsAnswered=0,correct=0,invuln=0,shake=0,spawnTimer=0,itemTimer=0,roadOffset=0,keys={},entities=[];
 let W=0,H=0,road={left:0,right:0,topLeft:0,topRight:0},player={x:0,y:0,w:70,h:105,vx:0,target:null};
-let currentQuestion=null,hintUsed=false,quizTimer=null,quizTimeLeft=0; const HINT_UNLOCK_SCORE=1200; const QUIZ_LIMITS={1:20,2:30,3:60};
+let currentQuestion=null,hintUsed=false,quizTimer=null,quizTimeLeft=0; const pauseBtn=document.getElementById('pauseBtn'); const HINT_UNLOCK_SCORE=1200; const QUIZ_LIMITS={1:20,2:30,3:60};
 document.getElementById('levelName').textContent=L.name;document.getElementById('missionText').textContent=L.mission;
 function resize(){const box=document.getElementById('gameArea').getBoundingClientRect();canvas.width=Math.floor(box.width*devicePixelRatio);canvas.height=Math.floor(box.height*devicePixelRatio);canvas.style.width=box.width+'px';canvas.style.height=box.height+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);W=box.width;H=box.height;road.left=W*.08;road.right=W*.92;road.topLeft=W*.32;road.topRight=W*.68;player.w=Math.max(62,Math.min(82,W*.075));player.h=player.w*1.52;player.y=H-player.h-36;if(!player.x)player.x=W/2-player.w/2;clampPlayer()}window.addEventListener('resize',resize);resize();
 let audioCtx=null,engine=null,music=null,ambientBeat=0;function tone(f=440,d=.1,type='sine',g=.05,delay=0){try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),gain=audioCtx.createGain();o.connect(gain);gain.connect(audioCtx.destination);o.type=type;o.frequency.setValueAtTime(f,audioCtx.currentTime+delay);gain.gain.setValueAtTime(g,audioCtx.currentTime+delay);gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+delay+d);o.start(audioCtx.currentTime+delay);o.stop(audioCtx.currentTime+delay+d+.03)}catch(e){}}
@@ -48,8 +48,39 @@ function startEngine(){if(engine)return;engine=setInterval(()=>{if(running&&!pau
 function startMusic(){if(music)return;music=setInterval(()=>{if(running&&!paused){const seq=[196,247,294,247,330,294,247,220];tone(seq[ambientBeat%seq.length],.09,'triangle',.014);if(ambientBeat%4===0)tone(98,.08,'sine',.016);ambientBeat++;}},280)}
 function stopMusic(){if(music){clearInterval(music);music=null}}
 function stopEngine(){if(engine){clearInterval(engine);engine=null}stopMusic()}
-document.getElementById('beginBtn').onclick=()=>{running=true;paused=false;last=performance.now();sound('start');document.getElementById('beginBtn').disabled=true;requestAnimationFrame(loop)};
-window.onkeydown=e=>{const k=e.key.toLowerCase(); keys[k]=true; if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k)) e.preventDefault();};window.onkeyup=e=>{keys[e.key.toLowerCase()]=false};
+document.getElementById('beginBtn').onclick=()=>{running=true;paused=false;last=performance.now();sound('start');pauseBtn.onclick=()=>{
+
+    if(!running) return;
+
+    paused=!paused;
+
+    if(paused){
+
+        pauseBtn.textContent='▶ Resume';
+
+    }else{
+
+        pauseBtn.textContent='⏸ Pause';
+
+        last=performance.now();
+        requestAnimationFrame(loop);
+    }
+};document.getElementById('beginBtn').disabled=true;requestAnimationFrame(loop)};
+window.onkeydown=e=>{const k=e.key.toLowerCase(); if(e.key.toLowerCase()==='p'){
+
+    paused=!paused;
+
+    if(paused){
+
+        pauseBtn.textContent='▶ Resume';
+
+    }else{
+
+        pauseBtn.textContent='⏸ Pause';
+        last=performance.now();
+        requestAnimationFrame(loop);
+    }
+} keys[k]=true; if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k)) e.preventDefault();};window.onkeyup=e=>{keys[e.key.toLowerCase()]=false};
 function setTarget(clientX){const r=canvas.getBoundingClientRect();player.target=clientX-r.left-player.w/2}canvas.onmousemove=e=>{if(running&&!paused)setTarget(e.clientX)};canvas.ontouchmove=e=>{if(running&&!paused)setTarget(e.touches[0].clientX);e.preventDefault()};
 function hold(id,key){const b=document.getElementById(id);b.onmousedown=b.ontouchstart=e=>{keys[key]=true;e.preventDefault()};b.onmouseup=b.onmouseleave=b.ontouchend=()=>keys[key]=false}hold('leftBtn','arrowleft');hold('rightBtn','arrowright');hold('upBtn','arrowup');hold('downBtn','arrowdown');
 function roadWidthAt(y){const t=y/H;return {l:road.topLeft+(road.left-road.topLeft)*t,r:road.topRight+(road.right-road.topRight)*t}}function clampPlayer(){const b=roadWidthAt(player.y+player.h*.75);player.x=Math.max(b.l+14,Math.min(b.r-player.w-14,player.x))}
