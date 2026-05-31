@@ -1,4 +1,16 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Play Road Rush</title><link rel="stylesheet" href="style.css"></head><body><nav class="nav"><a class="brand" href="dashboard.html"><img src="assets/logo.png">ROAD RUSH</a><div class="links"></div></nav><main class="game-shell"><aside class="hud card"><h2 id="levelName">Mission</h2><div class="stat"><b>Lives</b><span id="lives">❤️❤️❤️</span></div><div class="stat"><b>Questions</b><span id="questions">0 / 5</span></div><div class="stat"><b>Score</b><span id="score">0</span></div><div class="stat"><b>Coins</b><span id="coins">0</span></div><div class="stat"><b>Speed</b><span id="speed">1x</span></div><div class="stat"><b>Manual Gear</b><span id="manualSpeed">Normal</span></div><p class="mission" id="missionText"></p><div class="meter"><div class="fill" id="distanceFill"></div></div><p class="tiny muted" id="distanceText">0m / 1500m</p><button class="btn primary" id="beginBtn">Start Mission</button><a class="btn ghost" href="dashboard.html">Exit</a></aside><section id="gameArea"><canvas id="gameCanvas"></canvas><div class="cinematic" id="cinematic">CYBER CHECKPOINT</div></section><aside class="hud card"><h2>Controls</h2><p class="muted">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Play Road Rush</title><link rel="stylesheet" href="style.css"></head><body><nav class="nav"><a class="brand" href="dashboard.html"><img src="assets/logo.png">ROAD RUSH</a><div class="links"></div></nav><main class="game-shell"><aside class="hud card"><h2 id="levelName">Mission</h2><div class="stat"><b>Lives</b><span id="lives">❤️❤️❤️</span></div><div class="stat"><b>Questions</b><span id="questions">0 / 5</span></div><div class="stat"><b>Score</b><span id="score">0</span></div><div class="stat"><b>Coins</b><span id="coins">0</span></div><div class="stat"><b>Speed</b><span id="speed">1x</span></div><div class="stat"><b>Manual Gear</b><span id="manualSpeed">Normal</span></div><p class="mission" id="missionText"></p><div class="meter"><div class="fill" id="distanceFill"></div></div><p class="tiny muted" id="distanceText">0m / 1500m</p><button class="btn primary" id="beginBtn">Start Mission</button><a class="btn ghost" href="dashboard.html">Exit</a></aside><section id="gameArea">
+
+    <button id="pauseBtn" class="pause-btn">
+        ⏸ Pause
+    </button>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div class="cinematic" id="cinematic">
+        CYBER CHECKPOINT
+    </div>
+
+</section><aside class="hud card"><h2>Controls</h2><p class="muted">
 ← Move Left<br>
 → Move Right<br>
 A Accelerate<br>
