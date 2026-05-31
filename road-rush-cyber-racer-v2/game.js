@@ -219,20 +219,8 @@ const instructionModal = document.getElementById('instructionModal');
 const beginBtn = document.getElementById('beginBtn');
 
 if(gotItBtn){
-
     gotItBtn.onclick = () => {
-
         instructionModal.classList.remove('active');
-
-        running = true;
-        paused = false;
-        last = performance.now();
-
-        sound('start');
-
-        beginBtn.disabled = true;
-
-        requestAnimationFrame(loop);
+        beginBtn.disabled = false;
     };
-
 }
