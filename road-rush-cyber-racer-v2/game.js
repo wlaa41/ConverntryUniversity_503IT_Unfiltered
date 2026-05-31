@@ -40,7 +40,7 @@ const CAR_COLORS={classic:['#ffffff','#aef8ff'],neon:['#38e8ff','#ff4fd8'],shado
 let L=LEVELS[progress.level],running=false,paused=false,last=0,distance=0,score=0,coins=0,lives=3,shield=0,nitro=1,manualGear=1,questionsAnswered=0,correct=0,invuln=0,shake=0,spawnTimer=0,itemTimer=0,roadOffset=0,keys={},entities=[];
 let W=0,H=0,road={left:0,right:0,topLeft:0,topRight:0},player={x:0,y:0,w:70,h:105,vx:0,target:null};
 let currentQuestion=null,hintUsed=false,quizTimer=null,quizTimeLeft=0; const pauseBtn=document.getElementById('pauseBtn'); const HINT_UNLOCK_SCORE=1200; const QUIZ_LIMITS={1:20,2:30,3:60};
-document.getElementById('levelName').textContent=L.name;document.getElementById('missionText').textContent=L.mission;
+document.getElementById('levelName').textContent=L.name;document.getElementById('missionText').textContent=L.mission;document.getElementById('beginBtn').disabled = true;
 function resize(){const box=document.getElementById('gameArea').getBoundingClientRect();canvas.width=Math.floor(box.width*devicePixelRatio);canvas.height=Math.floor(box.height*devicePixelRatio);canvas.style.width=box.width+'px';canvas.style.height=box.height+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);W=box.width;H=box.height;road.left=W*.08;road.right=W*.92;road.topLeft=W*.32;road.topRight=W*.68;player.w=Math.max(62,Math.min(82,W*.075));player.h=player.w*1.52;player.y=H-player.h-36;if(!player.x)player.x=W/2-player.w/2;clampPlayer()}window.addEventListener('resize',resize);resize();
 let audioCtx=null,engine=null,music=null,ambientBeat=0;function tone(f=440,d=.1,type='sine',g=.05,delay=0){try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),gain=audioCtx.createGain();o.connect(gain);gain.connect(audioCtx.destination);o.type=type;o.frequency.setValueAtTime(f,audioCtx.currentTime+delay);gain.gain.setValueAtTime(g,audioCtx.currentTime+delay);gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+delay+d);o.start(audioCtx.currentTime+delay);o.stop(audioCtx.currentTime+delay+d+.03)}catch(e){}}
 function sound(s){if(s==='start'){[180,260,380,560].forEach((f,i)=>tone(f,.12,'triangle',.055,i*.08));startEngine();startMusic()} if(s==='checkpoint'){tone(740,.12,'sine',.06);tone(980,.18,'triangle',.05,.1)} if(s==='coin'){tone(1050,.08,'sine',.05);tone(1450,.1,'sine',.04,.06)} if(s==='hit'){tone(130,.18,'sawtooth',.08);tone(70,.28,'square',.05,.08)} if(s==='ok'){tone(530,.1,'triangle',.05);tone(790,.14,'triangle',.05,.08)} if(s==='bad'){tone(210,.14,'sawtooth',.06);tone(110,.25,'sawtooth',.045,.09)} if(s==='nitro'){tone(450,.08,'sawtooth',.04);tone(900,.28,'square',.035,.08)} if(s==='lap'){tone(620,.08,'triangle',.035);tone(760,.10,'triangle',.03,.08)} if(s==='win'){[523,659,784,1046].forEach((f,i)=>tone(f,.16,'triangle',.055,i*.11))} if(s==='speed'){tone(680,.08,'sawtooth',.035);tone(920,.08,'sawtooth',.025,.05)} if(s==='brake'){tone(260,.12,'sine',.04);tone(170,.12,'sine',.035,.07)}}
@@ -193,3 +193,13 @@ function saveResult(won){let users=get(LS.users,[]),u=activeUser();users=users.m
 function win(){running=false;stopEngine();saveResult(true);sound('win');document.getElementById('endTitle').textContent='Mission Complete!';document.getElementById('endMsg').textContent=progress.level<3?`Excellent driving! You cleared 5 questions with ${correct}/5 correct and unlocked Level ${progress.level+1}. Score: ${score}. Coins earned: ${coins}.`:`You completed all 3 cyber racing missions with ${correct}/5 correct in this level. Score: ${score}. Coins earned: ${coins}.`;endModal.classList.add('active')}
 function gameOver(msg){running=false;paused=true;stopEngine();saveResult(false);document.getElementById('endTitle').textContent='Game Over';document.getElementById('endMsg').textContent=`${msg} Score: ${score}. Coins earned: ${coins}. Questions cleared: ${questionsAnswered}/5. Correct answers: ${correct}/5.`;endModal.classList.add('active')}
 updateHud();draw();
+const gotItBtn = document.getElementById('gotItBtn');
+const instructionModal = document.getElementById('instructionModal');
+const beginBtn = document.getElementById('beginBtn');
+
+if(gotItBtn){
+    gotItBtn.onclick = () => {
+        instructionModal.classList.remove('active');
+        beginBtn.disabled = false;
+    };
+}
