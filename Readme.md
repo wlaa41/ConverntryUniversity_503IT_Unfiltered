@@ -48,20 +48,21 @@ The game is designed to make cyber-security learning more engaging, interactive,
 
 # Gameplay Concept
 
-The player controls a racing car and must avoid crashing into incoming enemy vehicles.
+The player controls a racing car and must avoid collisions with other vehicles on the road.
 
-If the player collides with an enemy car:
+If the player's car is involved in a collision:
 
-1. A cyber-security question appears.
-2. If the answer is correct:
+1. The player loses one life.
+2. The game continues if the player has remaining lives.
+3. The game ends when all lives are lost.
 
-   * The player gains another chance/life.
-   * The game continues.
-3. If the answer is incorrect:
+Cyber-security questions appear periodically during gameplay.
 
-   * The game ends.
-   * The player must restart.
-
+1. If the answer is correct:
+   - The player gains an extra life.
+2. If the answer is incorrect:
+   - The player loses 100 coins.
+3. The game then continues.
 The game contains three levels:
 
 ## Easy Mode
