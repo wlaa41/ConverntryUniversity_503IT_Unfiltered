@@ -164,7 +164,19 @@ function showHint(){
   sound('coin');
 }
 
-function answer(i,correctIdx){clearInterval(quizTimer);quizTimer=null;modal.classList.remove('active');questionsAnswered++;let users=get(LS.users,[]),u=activeUser();users=users.map(x=>x.email===u.email?{...x,totalQuestions:(x.totalQuestions||0)+1,correctQuestions:(x.correctQuestions||0)+(i===correctIdx?1:0)}:x);set(LS.users,users);if(i===correctIdx){correct++;score+=500;coins+=20;nitro=1.28;sound('ok');toast('Correct! Nitro boost unlocked.')}else{lives--;sound('bad');toast('Wrong answer: you lost 1 life.');if(lives<=0)return gameOver('Cyber checkpoint failed and no lives remain.')}paused=false;last=performance.now();requestAnimationFrame(loop)}
+function answer(i,correctIdx){clearInterval(quizTimer);quizTimer=null;modal.classList.remove('active');questionsAnswered++;let users=get(LS.users,[]),u=activeUser();users=users.map(x=>x.email===u.email?{...x,totalQuestions:(x.totalQuestions||0)+1,correctQuestions:(x.correctQuestions||0)+(i===correctIdx?1:0)}:x);set(LS.users,users);if(i===correctIdx){
+
+    correct++;
+
+    lives++;
+
+    score+=500;
+
+    coins+=20;
+
+    nitro=1.28;
+
+    toast('Correct! +1 Life gained.');sound('ok');toast('Correct! Nitro boost unlocked.')}else{coins=Math.max(0,coins-100);sound('bad');toast('Wrong answer. 100 coins deducted.');if(lives<=0)return gameOver('Cyber checkpoint failed and no lives remain.')}paused=false;last=performance.now();requestAnimationFrame(loop)}
 function draw(){ctx.save();if(shake>0)ctx.translate((Math.random()-.5)*10,(Math.random()-.5)*7);drawRoad();entities.forEach(e=>{if(e.type==='enemy')drawCar(e.x,e.y,e.w,e.h,'#ff2455','#870015',true);else{ctx.font='34px serif';ctx.shadowColor='rgba(80,255,157,.8)';ctx.shadowBlur=16;ctx.fillText(e.kind,e.x,e.y+35);ctx.shadowBlur=0}});let cols=CAR_COLORS[prefs.car]||CAR_COLORS.classic;if(invuln>0&&Math.floor(invuln/120)%2===0){ctx.globalAlpha=.45}drawCar(player.x,player.y,player.w,player.h,cols[0],cols[1]);ctx.globalAlpha=1;if(shield){ctx.strokeStyle='rgba(80,255,157,.8)';ctx.lineWidth=4;ctx.beginPath();ctx.arc(player.x+player.w/2,player.y+player.h/2,player.h*.62,0,Math.PI*2);ctx.stroke()}drawMiniDriver();ctx.restore()}
 function drawMiniDriver(){ctx.font='26px serif';ctx.fillText(prefs.gender==='male'?'👦':'👧',18,38)}
 let lastLapSound=0;
