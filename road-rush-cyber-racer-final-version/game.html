@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Play Road Rush</title><link rel="stylesheet" href="style.css?v=final-version-1"></head><body><nav class="nav"><a class="brand" href="dashboard.html"><img src="assets/logo.png">ROAD RUSH</a><div class="links"></div></nav><main class="game-shell"><aside class="hud card"><h2 id="levelName">Mission</h2><div class="stat"><b>Lives</b><span id="lives">❤️❤️❤️</span></div><div class="stat"><b>Questions</b><span id="questions">0 / 5</span></div><div class="stat"><b>Score</b><span id="score">0</span></div><div class="stat"><b>Coins</b><span id="coins">0</span></div><div class="stat"><b>Speed</b><span id="speed">1x</span></div><div class="stat"><b>Manual Gear</b><span id="manualSpeed">Normal</span></div><p class="mission" id="missionText"></p><div class="meter"><div class="fill" id="distanceFill"></div></div><p class="tiny muted" id="distanceText">0m / 1500m</p><button class="btn primary" id="beginBtn">Start Mission</button><a class="btn ghost" href="dashboard.html">Exit</a></aside><section id="gameArea">
+
+    <button id="pauseBtn" class="pause-btn">
+        ⏸ Pause
+    </button>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div class="cinematic" id="cinematic">
+        CYBER CHECKPOINT
+    </div>
+<div class="modal active" id="instructionModal">
+
+    <div class="modal-box">
+
+        <h2>How To Play Road Rush</h2>
+
+        <ul>
+            <li>Use ← and → to steer.</li>
+            <li>Press A to accelerate.</li>
+            <li>Press D to brake.</li>
+            <li>Press SPACE to pause or resume.</li>
+            <li>Avoid enemy cars.</li>
+            <li>Collect shields, nitro and coins.</li>
+            <li>Answer all 5 cyber security questions.</li>
+            <li>Correct answer = +1 Life.</li>
+            <li>Wrong answer = -100 Coins.</li>
+            <li>Get at least 3 correct answers to unlock the next level.</li>
+        </ul>
+
+       <button id="gotItBtn" class="btn primary">Got It</button>
+
+    </div>
+
+</div>
+</section><aside class="hud card"><h2>Controls</h2><p class="muted">
+← Move Left<br>
+→ Move Right<br>
+A Accelerate<br>
+D Brake<br>
+SPACE Pause / Resume<br>
+On mobile use the touch buttons below.
+</p><div class="control-pad mobile-pad"><button id="upBtn">▲<small>Speed</small></button><button id="leftBtn">←<small>Left</small></button><button id="rightBtn">→<small>Right</small></button><button id="downBtn">▼<small>Brake</small></button></div><p class="sound-tip">🔊 Start Mission enables engine, coin, checkpoint, crash, nitro, brake, speed and victory sounds.</p><div class="stat"><b>Shield</b><span>🛡️ blocks crash</span></div><div class="stat"><b>Nitro</b><span>⚡ speed burst</span></div><div class="stat"><b>Data</b><span>💾 bonus points</span></div><p class="muted">Clear all 5 questions, get at least 3 correct answers, and reach the target distance to unlock the next level.</p></aside></main><div class="modal" id="quizModal"><div class="modal-box"><h2 id="quizTitle">Cyber Checkpoint</h2><p id="quizQuestion"></p><p class="quiz-timer" id="quizTimer">⏱️ Time left: 20s</p><div class="hint-row"><button class="btn ghost hint-btn" id="hintBtn" onclick="showHint()" disabled>Hint unlocks at 1,200 score</button><p class="hint-text" id="hintText"></p></div><div class="answers" id="quizAnswers"></div></div></div><div class="modal" id="endModal"><div class="modal-box"><h2 id="endTitle"></h2><p id="endMsg"></p><p><button class="btn primary" onclick="location.href='dashboard.html'">Dashboard</button> <button class="btn" onclick="location.reload()">Play Again</button></p></div></div><div class="toast"></div><script src="app.js?v=final-version-1"></script><script src="game.js?v=final-version-1"></script></body></html>
