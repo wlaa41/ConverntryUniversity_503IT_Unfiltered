@@ -23,6 +23,7 @@ The game is designed to make cyber-security learning more engaging, interactive,
 | Richa Sorathiya   | Programmer / Game Logic Developer            | 16269255   |
 | Sabina Mahat      | Team Leader / Testing / Planning             | 15579678   |
 | Kaberi Shrestha   | UI Designer / Graphics Support               | 15758767   |
+| Kanchan Shrestha  | Designer                                     | 16093443   |
 
 ---
 
