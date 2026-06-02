@@ -106,6 +106,7 @@ The game uses racing challenges and cyber questions to make digital safety learn
 | Richa Sorathiya | Programmer / Game Logic Developer | 16269255 |
 | Sabina Mahat | Team Leader / Testing / Planning | 15579678 |
 | Kaberi Shrestha | UI Designer / Graphics Support | 15758767 |
+| Kanchan Shrestha | Sound / Graphic Designer | 16093443 |
 
 ## Future Improvements
 
