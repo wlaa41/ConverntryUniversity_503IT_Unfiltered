@@ -78,22 +78,6 @@ const pauseBtn = document.getElementById('pauseBtn');
 const HINT_UNLOCK_SCORE = 1200;
 const QUIZ_LIMITS = { 1: 20, 2: 30, 3: 60 };
 
-function togglePause() {
-  if (!running) return;
-
-  paused = !paused;
-
-  if (pauseBtn) {
-    pauseBtn.textContent =
-      paused ? '▶ Resume' : '⏸ Pause';
-  }
-
-  if (!paused) {
-    last = performance.now();
-    requestAnimationFrame(loop);
-  }
-}
-
 document.getElementById('levelName').textContent = L.name;
 document.getElementById('missionText').textContent = L.mission;
 document.getElementById('beginBtn').disabled = true;
@@ -177,7 +161,19 @@ document.getElementById('beginBtn').onclick = () => {
   last = performance.now();
   sound('start');
 
- pauseBtn.onclick = togglePause;
+   if (pauseBtn) { // FIX: null check on pauseBtn
+    pauseBtn.onclick = () => {
+      if (!running) return;
+      paused = !paused;
+      if (paused) {
+        pauseBtn.textContent = '▶ Resume';
+      } else {
+        pauseBtn.textContent = '⏸ Pause';
+        last = performance.now();
+        requestAnimationFrame(loop);
+      }
+    };
+
   }
 
   document.getElementById('closeInstructions').onclick = () => {
@@ -191,16 +187,19 @@ document.getElementById('beginBtn').onclick = () => {
 // --- Keyboard ---
 window.onkeydown = e => {
   const k = e.key.toLowerCase();
-
-  if (e.code === 'Space') {
-  e.preventDefault();
-  togglePause();
-  return;
-}
+   if (e.code === 'Space') {
+    paused = !paused;
+    if (paused) {
+      if (pauseBtn) pauseBtn.textContent = '▶ Resume';
+    } else {
+      if (pauseBtn) pauseBtn.textContent = '⏸ Pause';
+      last = performance.now();
+      requestAnimationFrame(loop);
+    }
+  }
 
   keys[k] = true;
-
-  if (['arrowup','arrowdown','arrowleft','arrowright'].includes(k)) {
+   if (['arrowup','arrowdown','arrowleft','arrowright'].includes(k)) {
     e.preventDefault();
   }
 };
@@ -208,7 +207,8 @@ window.onkeydown = e => {
 window.onkeyup = e => {
   keys[e.key.toLowerCase()] = false;
 };
-
+ 
+  
 // --- Mouse / Touch ---
 function setTarget(clientX) {
   const r = canvas.getBoundingClientRect();
