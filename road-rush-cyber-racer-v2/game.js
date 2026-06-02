@@ -161,7 +161,7 @@ document.getElementById('beginBtn').onclick = () => {
   last = performance.now();
   sound('start');
 
-  if (pauseBtn) { // FIX: null check on pauseBtn
+   if (pauseBtn) { // FIX: null check on pauseBtn
     pauseBtn.onclick = () => {
       if (!running) return;
       paused = !paused;
@@ -173,6 +173,7 @@ document.getElementById('beginBtn').onclick = () => {
         requestAnimationFrame(loop);
       }
     };
+
   }
 
   document.getElementById('closeInstructions').onclick = () => {
@@ -186,7 +187,7 @@ document.getElementById('beginBtn').onclick = () => {
 // --- Keyboard ---
 window.onkeydown = e => {
   const k = e.key.toLowerCase();
-  if (k === 'p') {
+   if (e.code === 'Space') {
     paused = !paused;
     if (paused) {
       if (pauseBtn) pauseBtn.textContent = '▶ Resume';
@@ -196,11 +197,18 @@ window.onkeydown = e => {
       requestAnimationFrame(loop);
     }
   }
-  keys[k] = true;
-  if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(k)) e.preventDefault();
-};
-window.onkeyup = e => { keys[e.key.toLowerCase()] = false; };
 
+  keys[k] = true;
+   if (['arrowup','arrowdown','arrowleft','arrowright'].includes(k)) {
+    e.preventDefault();
+  }
+};
+
+window.onkeyup = e => {
+  keys[e.key.toLowerCase()] = false;
+};
+ 
+  
 // --- Mouse / Touch ---
 function setTarget(clientX) {
   const r = canvas.getBoundingClientRect();
