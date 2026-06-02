@@ -160,23 +160,18 @@ document.getElementById('beginBtn').onclick = () => {
   paused = false;
   last = performance.now();
   sound('start');
-  document.getElementById('beginBtn').disabled = true;
-  requestAnimationFrame(loop);
-   };
-
-if (pauseBtn) {
-  pauseBtn.onclick = () => {
-    if (!running) return;
-    paused = !paused;
-    if (paused) {
-      pauseBtn.textContent = '▶ Resume';
-    } else {
-      pauseBtn.textContent = '⏸ Pause';
-      last = performance.now();
-      requestAnimationFrame(loop);
-    }
-  };
-}
+  if (pauseBtn) { // FIX: null check on pauseBtn
+    pauseBtn.onclick = () => {
+      if (!running) return;
+      paused = !paused;
+      if (paused) {
+        pauseBtn.textContent = '▶ Resume';
+      } else {
+        pauseBtn.textContent = '⏸ Pause';
+        last = performance.now();
+        requestAnimationFrame(loop);
+      }
+    };
 
   }
 
@@ -192,8 +187,6 @@ if (pauseBtn) {
 window.onkeydown = e => {
   const k = e.key.toLowerCase();
   if (e.code === 'Space') {
-    e.preventDefault();           // stop page scroll
-    if (!running) return;         // ← ADD THIS: ignore space before game starts
     paused = !paused;
     if (paused) {
       if (pauseBtn) pauseBtn.textContent = '▶ Resume';
