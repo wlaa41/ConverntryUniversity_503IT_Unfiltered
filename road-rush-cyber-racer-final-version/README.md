@@ -113,12 +113,12 @@ The game uses racing challenges and cyber questions to make digital safety learn
 
 | Team Members Name | Roles | Student ID |
 |---|---|---|
-| Anjila Gurung | Team Member / Testing | 15772268 |
-| Renita V Kapdiya | UI/UX Designer / Planner / Front-End Support | 15410267 |
-| Richa Sorathiya | Programmer / Game Logic Developer | 16269255 |
-| Sabina Mahat | Team Leader / Testing / Planning | 15579678 |
-| Kaberi Shrestha | UI Designer / Graphics Support | 15758767 |
-| Kanchan Shrestha | Sound / Graphic Designer | 16093443 |
+| Anjila Gurung | Minute Taker / Testing / Complete Finisher / Scrum Master | 15772268 |
+| Renita V Kapdiya | Planner / Front-End Developer / Implementer | 15410267 |
+| Richa Sorathiya | Programmer / Game Logic Developer / Plant / Backend Developer | 16269255 |
+| Sabina Mahat | Team Leader / Testing / Researcher | 15579678 |
+| Kaberi Shrestha | UI/UX Designer / Visual Designer / Team Member | 15758767 |
+| Kanchan Shrestha | Audio/Multimedia Designer / Team Member / Graphic Designer | 16093443 |
 
 ## Future Improvements
 
