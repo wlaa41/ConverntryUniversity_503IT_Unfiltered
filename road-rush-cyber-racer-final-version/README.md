@@ -21,12 +21,24 @@ Road Rush is an interactive cyber-security racing game where the player drives t
 - Sound effects using browser audio
 - Game over, restart and mission complete screens
 
-## Gameplay
+# Gameplay Concept
 
-The player controls a racing car and must survive until the distance target is completed. The player collects coins, shields and nitro boosts while avoiding enemy cars, malware traps and road hazards.
+The player controls a racing car and must avoid collisions with other vehicles on the road.
 
-If the player crashes, a cyber-security question appears. A correct answer gives the player another chance, while wrong answers reduce lives. At the end of each level, a final boss cyber quiz must be answered correctly to unlock the next level.
+If the player's car is involved in a collision:
 
+1. The player loses one life.
+2. The game continues if the player has remaining lives.
+3. The game ends when all lives are lost.
+
+Cyber-security questions appear periodically during gameplay.
+
+1. If the answer is correct:
+   - The player gains an extra life.
+2. If the answer is incorrect:
+   - The player loses 100 coins.
+3. The game then continues.
+   
 ## Levels
 
 ### Level 1: Safe Password City
