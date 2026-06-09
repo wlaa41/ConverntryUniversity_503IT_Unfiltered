@@ -174,3 +174,14 @@ The project includes both entertainment and educational value while encouraging 
 This project was created for educational purposes under the Coventry University Group 503IT module.
 
 ---
+
+## Group Members - Unfiltered
+
+| # | GitHub Username | Profile |
+|---|---|---|
+| 1 | `Renitakapdiya` | https://github.com/Renitakapdiya |
+| 2 | `Sabinamahat6` | https://github.com/Sabinamahat6 |
+| 3 | `shresthakanchan319-max` | https://github.com/shresthakanchan319-max |
+| 4 | `richasorathiya1012` | https://github.com/richasorathiya1012 |
+| 5 | `anjilag67` | https://github.com/anjilag67 |
+| 6 | `shresthakaberi813` | https://github.com/shresthakaberi813 |
